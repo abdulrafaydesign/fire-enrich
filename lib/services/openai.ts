@@ -1012,7 +1012,7 @@ Question: ${question}
   ): Promise<{ url: string; title?: string }> {
     try {
       const response = await this.client.chat.completions.create({
-        model: 'gpt-5-mini',
+        model: process.env.OPENAI_MODEL_MINI || process.env.OPENAI_MODEL || 'openai/gpt-oss-20b:free',
         messages: [
           {
             role: 'system',
@@ -1071,7 +1071,7 @@ Be concise but informative. If the content doesn't contain the answer, say so. W
       });
 
       const response = await this.client.chat.completions.create({
-        model: 'gpt-5',
+        model: process.env.OPENAI_MODEL || 'openai/gpt-oss-20b:free',
         messages,
         temperature: 0.7,
         max_tokens: 500,
